@@ -1,16 +1,14 @@
 // import { addSum } from "./providers";
-import { ResetButton, AddButton, RemoveButton } from "./components/Button";
+// import { ResetButton, RemoveButton } from "./components/Button";
+import { Form } from "./components/Form";
+// import { ResetButton, AddButton, RemoveButton } from "./components/Button";
 import "./App.css";
 
 function App() {
   return (
     <>
       <h1 className="text-4xl">Todo app</h1>
-      <div className="flex justify-between gap-1">
-        <AddButton />
-        <ResetButton />
-        <RemoveButton />
-      </div>
+      <Form />
     </>
   );
 }
