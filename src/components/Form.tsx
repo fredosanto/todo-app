@@ -1,18 +1,19 @@
 import { useState } from "react";
 
 function Form() {
-  const [todo, setTodo] = useState("");
-  //   const [todoArray, setTodoArray] = useState([]);
+  const [todo, setTodo] = useState<string>("");
+
+  const [todoArray, setTodoArray] = useState<string[]>([]);
+
   const list = document.getElementById("ul");
   const listItem = document.createDocumentFragment();
-  const todoArray: string[] = [];
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleAddTodo(e: React.FormEvent) {
     e.preventDefault();
-    console.log(todo);
-    todoArray.push(...todoArray, todo);
+    todoArray.push(todo);
+    setTodoArray(() => [...todoArray]);
+
     console.log(todoArray);
-    // console.log(setTodoArray);
   }
   return (
     <div className="flex flex-col gap-2">
@@ -25,7 +26,7 @@ function Form() {
       />
       <div className="flex justify-between gap-1">
         <button
-          onClick={handleSubmit}
+          onClick={handleAddTodo}
           className="bg-sky-500 py-2 w-full text-xs uppercase"
         >
           Add
