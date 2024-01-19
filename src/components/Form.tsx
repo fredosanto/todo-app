@@ -1,11 +1,18 @@
 import { useState } from "react";
 
+// function Item({todoArray}) {
+
+//     return(
+
+//     )
+// }
+
 function Form() {
   const [todo, setTodo] = useState<string>("");
 
   const [todoArray, setTodoArray] = useState<string[]>([]);
 
-  const list = document.getElementById("ul");
+  const list = document.getElementById("todo-list");
   const listItem = document.createDocumentFragment();
 
   function handleAddTodo(e: React.FormEvent) {
@@ -13,8 +20,17 @@ function Form() {
     todoArray.push(todo);
     setTodoArray(() => [...todoArray]);
 
+    const lastItem = todoArray.findLast((todo: string) => todo);
+    const li = document.createElement("li");
+    li.textContent = lastItem;
+    listItem.appendChild(li);
+    list?.appendChild(listItem);
+
+    console.log(lastItem);
+
     console.log(todoArray);
   }
+
   return (
     <div className="flex flex-col gap-2">
       <input
