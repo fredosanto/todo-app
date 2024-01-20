@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// function Item({todoArray}) {
+// function Item({}) {
 
 //     return(
 
@@ -12,21 +12,10 @@ function Form() {
 
   const [todoArray, setTodoArray] = useState<string[]>([]);
 
-  const list = document.getElementById("todo-list");
-  const listItem = document.createDocumentFragment();
-
   function handleAddTodo(e: React.FormEvent) {
     e.preventDefault();
     todoArray.push(todo);
     setTodoArray(() => [...todoArray]);
-
-    const lastItem = todoArray.findLast((todo: string) => todo);
-    const li = document.createElement("li");
-    li.textContent = lastItem;
-    listItem.appendChild(li);
-    list?.appendChild(listItem);
-
-    console.log(lastItem);
 
     console.log(todoArray);
   }
@@ -48,7 +37,11 @@ function Form() {
           Add
         </button>
       </div>
-      <ul id="todo-list"></ul>
+      <ul id="todo-list">
+        {todoArray.map((x) => (
+          <li key={x}>{x}</li>
+        ))}
+      </ul>
     </div>
   );
 }
