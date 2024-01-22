@@ -1,7 +1,27 @@
 import { useState } from "react";
 
-function Item({ x }: { x: string }) {
-  if (x) return <li>{x}</li>;
+interface ItemProps {
+  x: string;
+  list: string[];
+}
+
+function Item({ x, list }: ItemProps) {
+  function handleDelete() {
+    console.log(x);
+    console.log(list);
+    list.slice(list.indexOf(x));
+    console.log(list);
+  }
+  return (
+    <li className="uppercase my-2">
+      <div className="flex justify-around">
+        <div>{x}</div>
+        <button onClick={handleDelete} className="text-xs">
+          Delete
+        </button>
+      </div>
+    </li>
+  );
 }
 
 function Form() {
@@ -44,8 +64,7 @@ function Form() {
       </div>
       <ul id="todo-list">
         {todoArray.map((x) => (
-          //   <li key={x}>{x}</li>
-          <Item key={todoArray.indexOf(x)} x={x} />
+          <Item key={todoArray.indexOf(x)} x={x} list={todoArray} />
         ))}
       </ul>
     </div>
