@@ -2,26 +2,10 @@ import { useState } from "react";
 
 interface ItemProps {
   x: string;
-  list: string[];
 }
 
-function Item({ x, list }: ItemProps) {
-  function handleDelete() {
-    console.log(x);
-    console.log(list);
-    list.slice(list.indexOf(x));
-    console.log(list);
-  }
-  return (
-    <li className="uppercase my-2">
-      <div className="flex justify-around">
-        <div>{x}</div>
-        <button onClick={handleDelete} className="text-xs">
-          Delete
-        </button>
-      </div>
-    </li>
-  );
+function Item({ x }: ItemProps) {
+  return <li className="uppercase my-2">{x}</li>;
 }
 
 function Form() {
@@ -44,6 +28,13 @@ function Form() {
     console.log(todoArray);
   }
 
+  function handleDelete({ x }: ItemProps) {
+    console.log(x);
+    const newArray = todoArray.filter((e) => e !== x);
+    console.log(newArray);
+    setTodoArray(newArray);
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <input
@@ -64,7 +55,12 @@ function Form() {
       </div>
       <ul id="todo-list">
         {todoArray.map((x) => (
-          <Item key={todoArray.indexOf(x)} x={x} list={todoArray} />
+          <div key={todoArray.indexOf(x)} className="flex justify-around">
+            <Item x={x} />
+            <button onClick={() => handleDelete({ x })} className="text-xs">
+              Delete
+            </button>
+          </div>
         ))}
       </ul>
     </div>
